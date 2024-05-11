@@ -1,0 +1,16 @@
+﻿  additionalFunc.cpp
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(28,33): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(28,20): warning C4267: инициализация: преобразование из "size_t" в "const int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(29,33): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(29,20): warning C4267: инициализация: преобразование из "size_t" в "const int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(30,33): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(30,20): warning C4267: инициализация: преобразование из "size_t" в "const int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(186,41): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(186,25): warning C4267: инициализация: преобразование из "size_t" в "const int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(265,28): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(265,20): warning C4267: инициализация: преобразование из "size_t" в "const int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(266,28): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(266,20): warning C4267: инициализация: преобразование из "size_t" в "const int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(267,28): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp(267,20): warning C4267: инициализация: преобразование из "size_t" в "const int"; возможна потеря данных
+  HarmonicProblem.vcxproj -> C:\Users\Дмитрий\source\repos\HarmonicProblem\x64\Debug\HarmonicProblem.exe
