@@ -127,12 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="additionalFunc.cpp" />
+    <ClCompile Include="additionalFuncs.cpp" />
     <ClCompile Include="funcOfArea.cpp" />
     <ClCompile Include="funcsMatrix.cpp" />
+    <ClCompile Include="GMRES_LU.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="LDU.cpp" />
-    <ClCompile Include="LOS.cpp" />
+    <ClCompile Include="LinearAlgebraAlgorithms.cpp" />
+    <ClCompile Include="LOS_LU.cpp" />
+    <ClCompile Include="LUprecondition.cpp" />
     <ClCompile Include="mainProg.cpp" />
     <ClCompile Include="GaussQuadratures.cpp" />
     <ClCompile Include="structs.h" />

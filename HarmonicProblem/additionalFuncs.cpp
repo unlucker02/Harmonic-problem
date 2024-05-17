@@ -1,29 +1,30 @@
 #include "functions.h"
 
-double uNumMinusUReal(ShiftsArrays &I, vector<vector<int>> &areasMesh, ParametresMesh &coefs, vector<double> &q, SplittingMesh &sMesh, double x, double y, double z, double t)
+double uNumMinusUReal(ShiftsArrays &I, vector<vector<int>> &areasMesh, FunctionsProblem &funcs, vector<double> &q, SplittingMesh &sMesh, double x, double y, double z, double t)
 {
-   double u = uNum(I, areasMesh, coefs, q, sMesh, x, y, z, t);
-   double uR = uReal(coefs, x, y, z, t);
+   double u = uNum(I, areasMesh, funcs, q, sMesh, x, y, z, t);
+   double uR = uReal(funcs, x, y, z, t);
 
    return (u - uR) * (u - uR);
 }
 
-double uReal(ParametresMesh &coefs, double x, double y, double z, double t)
+double uReal(FunctionsProblem &funcs, double x, double y, double z, double t)
 {
-   auto &omega = coefs.omega;
+   auto &omega = funcs.omega;
 
    // (x * x + y * y + z * z) * sin(omega[0]() * t) + (x * x * y + z * z) * cos(omega[0]() * t)
+   // sin(x + z) * sin(omega[0] * t) - cos(y + z) * cos(omega[0] * t)
 
-   return sin(x + z) * sin(omega[0]() * t) - cos(y + z) * cos(omega[0]() * t);
+   return (x + y + z) * sin(omega[0] * t) + (x + 2 * y + z) * cos(omega[0] * t);
 }
 
-double uNum(ShiftsArrays &I, vector<vector<int>> &areasMesh, ParametresMesh &coefs, vector<double> &q, SplittingMesh &sMesh, double x, double y, double z, double t)
+double uNum(ShiftsArrays &I, vector<vector<int>> &areasMesh, FunctionsProblem &funcs, vector<double> &q, SplittingMesh &sMesh, double x, double y, double z, double t)
 {
    auto &xCoord = sMesh.x;
    auto &yCoord = sMesh.y;
    auto &zCoord = sMesh.z;
 
-   auto &omega = coefs.omega;
+   auto &omega = funcs.omega;
 
    const int xSize = xCoord.size();
    const int ySize = yCoord.size();
@@ -110,7 +111,7 @@ double uNum(ShiftsArrays &I, vector<vector<int>> &areasMesh, ParametresMesh &coe
                q[2 * globalNums[6] + 1] * psi7 +
                q[2 * globalNums[7] + 1] * psi8;
 
-   double u = us * sin(omega[numArea]() * t) + uc * cos(omega[numArea]() * t);
+   double u = us * sin(omega[numArea] * t) + uc * cos(omega[numArea] * t);
 
    return u;
 }
@@ -292,14 +293,14 @@ void outputForTests(SplittingMesh &sMesh, vector<double> &q, double normFromLos)
    fclose(out);
 }
 
-void outputForReseach(ParametresMesh &coefs, double timeLOS, double normFromLOS, double timeLDU, double normFromLDU)
+void outputForReseach(FunctionsProblem &funcs, double timeLOS, double normFromLOS, double timeLDU, double normFromLDU)
 {
    std::ofstream out("research.txt", std::ios::app);
 
-   out << std::setprecision(3) << coefs.omega[0]() << " "
-       << std::setprecision(3) << coefs.lambda[0]() << " "
-       << std::setprecision(3) << coefs.khi[0]() << " "
-       << std::setprecision(3) << coefs.sigma[0]() << " "
+   out << std::setprecision(3) << funcs.omega[0] << " "
+       << std::setprecision(3) << funcs.lambda[0] << " "
+       << std::setprecision(3) << funcs.khi[0] << " "
+       << std::setprecision(3) << funcs.sigma[0] << " "
        << timeLOS << " " << normFromLOS << " "
        << timeLDU << " " << normFromLDU << " "
        << "\n";

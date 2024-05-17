@@ -7,7 +7,6 @@ int main()
    ShiftsArrays I{ };
    BoundaryConds conds{ };
    SLAE slae{ }, LU{ };
-   ParametresMesh coefs;
    FunctionsProblem funcs;
    LOS vectors{ };
    ProfileMatrix pMatrix{ };
@@ -29,8 +28,10 @@ int main()
    generatePortraitSparseMatrix(slae, sMesh.x.size(), sMesh.y.size(), sMesh.z.size());
 
    // Полностью собираем глобальную матрицу
-   calcGlobalMatrixAndVector(slae, mesh, sMesh, I, coefs, conds, funcs);
-   
+   calcGlobalMatrixAndVector(slae, mesh, sMesh, I, conds, funcs);
+
+   SLAE slaeTemp = slae;
+
    std::cout << "LOS started to solve.\n";
    auto startLOS = std::chrono::steady_clock::now();
    
@@ -61,14 +62,27 @@ int main()
    std::cout << "LDU finished to solve.\n"
              << "Time for LDU solver: " << timeLDU << "\n\n";
 
+   std::cout << "GMRES started to solve.\n";
+   auto startGMRES = std::chrono::steady_clock::now();
+
+   // Получаем решение
+   GMRES(slaeTemp, 10, 10000, 1e-14);
+
+   auto finishGMRES = std::chrono::steady_clock::now();
+   double timeGMRES = std::chrono::duration<double, std::milli>(finishGMRES - startGMRES).count();
+
+   std::cout << "GMRES finished to solve.\n"
+      << "Time for GMRES solver: " << timeGMRES << "\n\n";
+
    // Считается нормы ||u_числ - u_анал|| для u_числ
    // от ЛОСа и от LDU 
-   double normFromLOS = normL2(I, mesh.areasMesh, coefs, slae.q, sMesh);
-   double normFromLDU = normL2(I, mesh.areasMesh, coefs, q, sMesh);
+   double normFromLOS = normL2(I, mesh.areasMesh, funcs, slae.q, sMesh);
+   double normFromLDU = normL2(I, mesh.areasMesh, funcs, q, sMesh);
+   double normFromGMRES = normL2(I, mesh.areasMesh, funcs, slaeTemp.q, sMesh);
 
-//   outputForTests(sMesh, q, normFromLDU);
+   outputForTests(sMesh, slaeTemp.q, normFromGMRES);
 
-   outputForReseach(coefs, timeLOS, normFromLOS, timeLDU, normFromLDU);
+//   outputForReseach(funcs, timeLOS, normFromLOS, timeLDU, normFromLDU);
 
    return 0;
 }

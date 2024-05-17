@@ -1,12 +1,12 @@
 #include "matrices.h"
 
 // Полная сборка глобальной матрицы и вектора правой части
-void calcGlobalMatrixAndVector(SLAE &slae, Mesh &mesh, SplittingMesh &sMesh, ShiftsArrays &I, ParametresMesh &coefs, BoundaryConds &conds, FunctionsProblem &funcs)
+void calcGlobalMatrixAndVector(SLAE &slae, Mesh &mesh, SplittingMesh &sMesh, ShiftsArrays &I, BoundaryConds &conds, FunctionsProblem &funcs)
 {
-   auto &lambda = coefs.lambda;
-   auto &sigma = coefs.sigma;
-   auto &khi = coefs.khi;
-   auto &omega = coefs.omega;
+   auto &lambda = funcs.lambda;
+   auto &sigma = funcs.sigma;
+   auto &khi = funcs.khi;
+   auto &omega = funcs.omega;
 
    auto &x = sMesh.x;
    auto &y = sMesh.y;
@@ -56,19 +56,19 @@ void calcGlobalMatrixAndVector(SLAE &slae, Mesh &mesh, SplittingMesh &sMesh, Shi
                      int nuj = nu(j);
                      int upsilonj = upsilon(j);
 
-                     double stiffnessij = lambda[numArea]() *
+                     double stiffnessij = lambda[numArea] *
                         (1. / hx * G[mui][muj] * hy * M[nui][nuj] * hz * M[upsiloni][upsilonj] +
                          hx * M[mui][muj] * 1. / hy * G[nui][nuj] * hz * M[upsiloni][upsilonj] +
                          hx * M[mui][muj] * hy * M[nui][nuj] * 1. / hz * G[upsiloni][upsilonj]);
 
                      double massij = hx * hy * hz * M[mui][muj] * M[nui][nuj] * M[upsiloni][upsilonj];
 
-                     double pij = stiffnessij - omega[numArea]() * omega[numArea]() * khi[numArea]() * massij;
+                     double pij = stiffnessij - omega[numArea] * omega[numArea] * khi[numArea] * massij;
 
                      addElemLocalMatrixInGlobalMatrix(slae.A, pij, 2 * globalNum[i], 2 * globalNum[j]);
                      addElemLocalMatrixInGlobalMatrix(slae.A, pij, 2 * globalNum[i] + 1, 2 * globalNum[j] + 1);
 
-                     double cij = omega[numArea]() * sigma[numArea]() * massij;
+                     double cij = omega[numArea] * sigma[numArea] * massij;
 
                      addElemLocalMatrixInGlobalMatrix(slae.A, -cij, 2 * globalNum[i], 2 * globalNum[j] + 1);
                      addElemLocalMatrixInGlobalMatrix(slae.A, cij, 2 * globalNum[i] + 1, 2 * globalNum[j]);

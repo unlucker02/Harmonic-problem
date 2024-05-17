@@ -30,7 +30,7 @@ void getQuadratures3D(vector<QuadratureNode> &quadratures)
          }
 }
 
-double normL2(ShiftsArrays &I, vector<vector<int>> &areasMesh, ParametresMesh &coefs, vector<double> &q, SplittingMesh &sMesh)
+double normL2(ShiftsArrays &I, vector<vector<int>> &areasMesh, FunctionsProblem &funcs, vector<double> &q, SplittingMesh &sMesh)
 {
    auto &xCoords = sMesh.x;
    auto &yCoords = sMesh.y;
@@ -66,7 +66,7 @@ double normL2(ShiftsArrays &I, vector<vector<int>> &areasMesh, ParametresMesh &c
                   double y = hy / 2. * node.y + (yCoords[s] + yCoords[s + 1]) / 2.;
                   double z = hz / 2. * node.z + (zCoords[r] + zCoords[r + 1]) / 2.;
 
-                  valueOfIntegral += node.weight * uNumMinusUReal(I, areasMesh, coefs, q, sMesh, x, y, z, 2.);
+                  valueOfIntegral += node.weight * uNumMinusUReal(I, areasMesh, funcs, q, sMesh, x, y, z, 2.);
                }
 
                normL2 += hx * hy * hz * valueOfIntegral / 8.;
