@@ -1,9 +1,12 @@
-C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFunc.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\additionalFunc.obj
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\additionalFuncs.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\additionalFuncs.obj
 C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\funcOfArea.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\funcOfArea.obj
 C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\funcsMatrix.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\funcsMatrix.obj
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\GMRES_LU.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\GMRES_LU.obj
 C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\input.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\input.obj
 C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\LDU.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\LDU.obj
-C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\LOS.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\LOS.obj
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\LinearAlgebraAlgorithms.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\LinearAlgebraAlgorithms.obj
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\LOS_LU.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\LOS_LU.obj
+C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\LUprecondition.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\LUprecondition.obj
 C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\mainProg.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\mainProg.obj
 C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\GaussQuadratures.cpp;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\GaussQuadratures.obj
 C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\structs.h;C:\Users\Дмитрий\source\repos\HarmonicProblem\HarmonicProblem\x64\Debug\structs.obj

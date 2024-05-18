@@ -1,7 +1,9 @@
 #include "functions.h"
 
-void GMRES(SLAE &slae, int m, int maxIter, double eps)
+int GMRES(SLAE &slae, int m, int maxIter, double eps)
 {
+   int countIter = 1;
+
    auto &A = slae.A;
    auto &q = slae.q;
 
@@ -36,6 +38,9 @@ void GMRES(SLAE &slae, int m, int maxIter, double eps)
 
    for (int k = 1; k < maxIter && relativeDiscrepancy > eps; k++)
    {
+      countIter++;
+//      std::cout << k << " " << relativeDiscrepancy << "\n";
+
       bool elemHisZero = false;
       int mTemp = m;
 
@@ -99,6 +104,10 @@ void GMRES(SLAE &slae, int m, int maxIter, double eps)
       clearMatrix(V);
       clearMatrix(H);
    }
+
+//   std::cout << relativeDiscrepancy << "\n";
+
+   return countIter;
 }
 
 void calcVectorDiscrepancy(SLAE &slae, vector<double> &discrepancy)

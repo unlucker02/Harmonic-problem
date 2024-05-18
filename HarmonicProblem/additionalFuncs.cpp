@@ -15,7 +15,7 @@ double uReal(FunctionsProblem &funcs, double x, double y, double z, double t)
    // (x * x + y * y + z * z) * sin(omega[0]() * t) + (x * x * y + z * z) * cos(omega[0]() * t)
    // sin(x + z) * sin(omega[0] * t) - cos(y + z) * cos(omega[0] * t)
 
-   return (x + y + z) * sin(omega[0] * t) + (x + 2 * y + z) * cos(omega[0] * t);
+   return sin(x + z) * sin(omega[0] * t) - cos(y + z) * cos(omega[0] * t);
 }
 
 double uNum(ShiftsArrays &I, vector<vector<int>> &areasMesh, FunctionsProblem &funcs, vector<double> &q, SplittingMesh &sMesh, double x, double y, double z, double t)
@@ -293,7 +293,7 @@ void outputForTests(SplittingMesh &sMesh, vector<double> &q, double normFromLos)
    fclose(out);
 }
 
-void outputForReseach(FunctionsProblem &funcs, double timeLOS, double normFromLOS, double timeLDU, double normFromLDU)
+void outputForReseach(FunctionsProblem &funcs, double timeLOS, double normFromLOS, double timeLDU, double normFromLDU, double timeGMRES, double normFromGMRES)
 {
    std::ofstream out("research.txt", std::ios::app);
 
@@ -303,7 +303,35 @@ void outputForReseach(FunctionsProblem &funcs, double timeLOS, double normFromLO
        << std::setprecision(3) << funcs.sigma[0] << " "
        << timeLOS << " " << normFromLOS << " "
        << timeLDU << " " << normFromLDU << " "
+       << timeGMRES << " " << normFromGMRES << " "
        << "\n";
 
    out.close();
+}
+
+void clearVector(vector<double> &vec)
+{
+   const int sizeVector = vec.size();
+
+   for (int i = 0; i < sizeVector; i++)
+      vec[i] = 0;
+}
+
+void clearSLAE(SLAE &slae)
+{
+   const int sizeMatrix = slae.A.di.size();
+   const int countNonZeroElems = slae.A.ig[sizeMatrix];
+
+   for (int i = 0; i < sizeMatrix; i++)
+   {
+      slae.A.di[i] = 0;
+      slae.q[i] = 0;
+      slae.b[i] = 0;
+   }
+
+   for (int i = 0; i < countNonZeroElems; i++)
+   {
+      slae.A.ggl[i] = 0;
+      slae.A.ggu[i] = 0;
+   }
 }

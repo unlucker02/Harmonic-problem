@@ -26,7 +26,7 @@ struct FunctionsProblem
 
    vector<std::function<double(double, double, double)>> fs
    {
-      [this](double x, double y, double z) { return -omega[0] * sigma[0] * (x + 2 * y + z) - omega[0] * omega[0] * khi[0] * (x + y + z); }, // 1
+      [this](double x, double y, double z) { return 2. * lambda[0] * sin(x + z) - omega[0] * sigma[0] * (-cos(y + z)) - omega[0] * omega[0] * khi[0] * sin(x + z); }, // 1
       [](double x, double y, double z) { return x * x * x + 216; }, // 2
       [](double x, double y, double z) { return 216 + y * y * y; } // 3
    }; // -3 * x - 2 * y - 2 * z
@@ -35,7 +35,7 @@ struct FunctionsProblem
 
    vector<std::function<double(double, double, double)>> fc
    {
-      [this](double x, double y, double z) { return omega[0] * sigma[0] * (x + y + z) - omega[0] * omega[0] * khi[0] * (x + 2 * y + z); }, // 1
+      [this](double x, double y, double z) { return -2. * lambda[0] * cos(y + z) + omega[0] * sigma[0] * sin(x + z) - omega[0] * omega[0] * khi[0] * (-cos(y + z)); }, // 1
       [](double x, double y, double z) { return x * x * x + 216; }, // 2
       [](double x, double y, double z) { return 216 + y * y * y; } // 3
    }; // -4 - 4 * y + 20 * x * x - 48 * x * x * y + 20 * y * y - 28 * z * z
@@ -43,12 +43,12 @@ struct FunctionsProblem
 
    vector<std::function<double(double, double, double)>> ugS
    {
-      [](double x, double y, double z) { return x + y; }, // 1
-      [](double x, double y, double z) { return 4 + y + z; }, // 2
-      [](double x, double y, double z) { return x + y + 4; }, // 3
-      [](double x, double y, double z) { return y + z; }, // 4
-      [](double x, double y, double z) { return x + z; }, // 5
-      [](double x, double y, double z) { return x + 4 + z; }, // 6
+      [](double x, double y, double z) { return sin(x); }, // 1
+      [](double x, double y, double z) { return sin(4 + z); }, // 2
+      [](double x, double y, double z) { return sin(x + 4); }, // 3
+      [](double x, double y, double z) { return sin(z); }, // 4
+      [](double x, double y, double z) { return sin(x + z); }, // 5
+      [](double x, double y, double z) { return sin(x + z); }, // 6
       [](double x, double y, double z) { return 27 + y * y * y; }, // 7
       [](double x, double y, double z) { return x * x * x + 1; }, // 8
       [](double x, double y, double z) { return 3 + y; }, // 9
@@ -59,12 +59,12 @@ struct FunctionsProblem
 
    vector<std::function<double(double, double, double)>> ugC
    {
-      [](double x, double y, double z) { return x + 2 * y; }, // 1
-      [](double x, double y, double z) { return 4 + 2 * y + z; }, // 2
-      [](double x, double y, double z) { return x + 2 * y + 4; }, // 3
-      [](double x, double y, double z) { return 2 * y + z; }, // 4
-      [](double x, double y, double z) { return x + z; }, // 5
-      [](double x, double y, double z) { return x + 8 + z; }, // 6
+      [](double x, double y, double z) { return -cos(y); }, // 1
+      [](double x, double y, double z) { return -cos(y + z); }, // 2
+      [](double x, double y, double z) { return -cos(y + 4); }, // 3
+      [](double x, double y, double z) { return -cos(y + z); }, // 4
+      [](double x, double y, double z) { return -cos(z); }, // 5
+      [](double x, double y, double z) { return -cos(4 + z); }, // 6
       [](double x, double y, double z) { return 27 + y * y * y; }, // 7
       [](double x, double y, double z) { return x * x * x + 1; }, // 8
       [](double x, double y, double z) { return 3 + y; }, // 9
@@ -105,7 +105,7 @@ void calcDiscrepancy(SLAE &slae, LOS &vectors, double &normb);
 
 
 // GMRES_LU и функции для него
-void GMRES(SLAE &slae, int m, int maxIter, double eps);
+int GMRES(SLAE &slae, int m, int maxIter, double eps);
 void calcVectorDiscrepancy(SLAE &slae, vector<double> &discrepancy);
 void initFirstColumn(vector<vector<double>> &V, vector<double> &r);
 void initSizeOfMatrix(vector<vector<double>> &matrix, int rows, int columns);
@@ -157,5 +157,7 @@ int getSizeSet(std::set<int> &list, int i);
 void setStringMatrixInZero(SparseMatrix &matrix, int numString);
 int binarySearch(vector<int> &vector, int target, int low, int high);
 void convertSparseToProfile(SparseMatrix &matrix, ProfileMatrix &resultMatrix);
+void clearVector(vector<double> &vec);
+void clearSLAE(SLAE &slae);
 void outputForTests(SplittingMesh &sMesh, vector<double> &q, double normFromLos);
-void outputForReseach(FunctionsProblem &funcs, double timeLOS, double normFromLOS, double timeLDU, double normFromLDU);
+void outputForReseach(FunctionsProblem &funcs, double timeLOS, double normFromLOS, double timeLDU, double normFromLDU, double timeGMRES, double normFromGMRES);
